@@ -1,6 +1,21 @@
 {
-    "name": "stevecorona/SessionHandlerCookie",
+    "name": "SessionHandlerCookie/SessionHandlerCookie",
+    "type": "library",
+    "description": "HMAC Cookie Sessions for PHP 5.4",
+    "keywords": ["sessions", "cookies"],
+    "homepage": "https://github.com/stevecorona/SessionHandlerCookie",
+    "license": "MIT",
+    "authors": [
+    	{
+    		"name": "Steve Corona",
+    		"email": "stevecorona@me.com",
+    		"homepage": "http://stevecorona.com",
+    		"role": "Author"
+    	}
+    ],
     "require": {
-        "php": ">=5.4.0"
-    }
+        "php": ">=5.4.0",
+        "ext-hash": "*"
+    },
+    "version": "1.0.0"
 }
