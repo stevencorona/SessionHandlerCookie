@@ -1,0 +1,6 @@
+{
+    "name": "stevecorona/SessionHandlerCookie",
+    "require": {
+        "php": ">=5.4.0"
+    }
+}
