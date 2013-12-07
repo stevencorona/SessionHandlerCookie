@@ -1,9 +1,9 @@
 {
-    "name": "session-handler-cookie/session-handler-cookie",
+    "name": "vijinho/session-handler-cookie",
     "type": "library",
-    "description": "HMAC Cookie Sessions for PHP 5.4",
+    "description": "Flexible HMAC Cookie Sessions for PHP 5.4",
     "keywords": ["sessions", "cookies"],
-    "homepage": "https://github.com/stevecorona/SessionHandlerCookie",
+    "homepage": "https://github.com/vijinho/SessionHandlerCookie",
     "license": "MIT",
     "authors": [
     	{
@@ -11,7 +11,13 @@
     		"email": "stevecorona@me.com",
     		"homepage": "http://stevecorona.com",
     		"role": "Author"
-    	}
+    	},
+    	{
+    		"name": "Vijay Mahrra",
+    		"email": "vijay@yoyo.org",
+    		"homepage": "http://about.me/vijay.mahrra",
+    		"role": "Author"
+    	},
     ],
     "require": {
         "php": ">=5.4.0",
