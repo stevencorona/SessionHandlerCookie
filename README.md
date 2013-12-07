@@ -1,12 +1,24 @@
 SessionHandlerCookie
 ====================
-This is my fork of https://github.com/stevencorona/SessionHandlerCookie by Steve Corona which adds a constructor method which takes in the following parameters for the hash:
+This is my fork of https://github.com/stevencorona/SessionHandlerCookie by Steve Corona which adds a constructor method which takes in the following parameters for the hash and methods to retrieve:
 
 ```
     public function __construct($HASH_SECRET = 'YOUR_SECRET_STRING', $HASH_ALGO = 'sha512', $HASH_LEN = 128) {
         $this->HASH_SECRET = $HASH_SECRET;
         $this->HASH_ALGO = $HASH_ALGO;
         $this->HASH_LEN = $HASH_LEN;
+    }
+
+    public function getHashLength() {
+        return $this->HASH_LEN;
+    }
+
+    public function getHashAlgorithm() {
+        return $this->HASH_ALGO;
+    }
+
+    public function getSecret() {
+        return $this->HASH_SECRET;
     }
 ```
 

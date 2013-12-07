@@ -21,14 +21,26 @@ class SessionHandlerCookie implements SessionHandlerInterface {
 
     private $data = array();
     private $save_path = null;
-    private $HASH_LEN;
-    private $HASH_ALGO;
-    private $HASH_SECRET;
+    public $HASH_LEN;
+    public $HASH_ALGO;
+    public $HASH_SECRET;
 
     public function __construct($HASH_SECRET = 'YOUR_SECRET_STRING', $HASH_ALGO = 'sha512', $HASH_LEN = 128) {
         $this->HASH_SECRET = $HASH_SECRET;
         $this->HASH_ALGO = $HASH_ALGO;
         $this->HASH_LEN = $HASH_LEN;
+    }
+
+    public function getHashLength() {
+        return $this->HASH_LEN;
+    }
+
+    public function getHashAlgorithm() {
+        return $this->HASH_ALGO;
+    }
+
+    public function getSecret() {
+        return $this->HASH_SECRET;
     }
 
     public function open($save_path, $name) {
