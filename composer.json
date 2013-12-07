@@ -17,7 +17,7 @@
     		"email": "vijay@yoyo.org",
     		"homepage": "http://about.me/vijay.mahrra",
     		"role": "Author"
-    	},
+    	}
     ],
     "require": {
         "php": ">=5.4.0",
