@@ -26,6 +26,11 @@ This is my fork of https://github.com/stevencorona/SessionHandlerCookie by Steve
 
 2) Compresses the cookie data with maximum gzip level 9 and uses the session.cookie_lifetime php.ini settings.
 
+```
+        // Set a cookie with the data
+        setcookie($id, base64_encode(gzcompress($data, 9)), time() + ini_get('session.cookie_lifetime'));
+```
+
 # Original README Copyright (c) 2012, Steve Corona
 `SessionHandlerCookie` is a short, but useful piece of code that I've decided to open source from my book, [Scaling PHP Applications](http://scalingphpbook.com).
 
