@@ -58,7 +58,7 @@ class SessionHandlerCookie implements SessionHandlerInterface {
 
         // We expect the cookie to be base64 encoded, so let's decode it and make sure
         // that the cookie, at a minimum, is longer than our expact hash length.
-        $raw = base64_decode($_COOKIE[$id]);
+        $raw = gzuncompress(base64_decode($_COOKIE[$id]));
         if (strlen($raw) < $this->HASH_LEN)
             return '';
 
@@ -87,7 +87,7 @@ class SessionHandlerCookie implements SessionHandlerInterface {
         $data .= $hash;
 
         // Set a cookie with the data
-        setcookie($id, base64_encode($data), time() + ini_get('session.cookie_lifetime'));
+        setcookie($id, base64_encode(gzcompress($data, 9)), time() + ini_get('session.cookie_lifetime'));
     }
 
     public function destroy($id) {

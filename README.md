@@ -1,6 +1,8 @@
 SessionHandlerCookie
 ====================
-This is my fork of https://github.com/stevencorona/SessionHandlerCookie by Steve Corona which adds a constructor method which takes in the following parameters for the hash and methods to retrieve:
+This is my fork of https://github.com/stevencorona/SessionHandlerCookie by Steve Corona which:
+
+1) adds a constructor method which takes in the following parameters for the hash and methods to retrieve:
 
 ```
     public function __construct($HASH_SECRET = 'YOUR_SECRET_STRING', $HASH_ALGO = 'sha512', $HASH_LEN = 128) {
@@ -21,6 +23,8 @@ This is my fork of https://github.com/stevencorona/SessionHandlerCookie by Steve
         return $this->HASH_SECRET;
     }
 ```
+
+2) Compresses the cookie data with maximum gzip level 9 and uses the session.cookie_lifetime php.ini settings.
 
 # Original README Copyright (c) 2012, Steve Corona
 `SessionHandlerCookie` is a short, but useful piece of code that I've decided to open source from my book, [Scaling PHP Applications](http://scalingphpbook.com).
