@@ -87,7 +87,7 @@ class SessionHandlerCookie implements SessionHandlerInterface {
         $data .= $hash;
 
         // Set a cookie with the data
-        setcookie($id, base64_encode($data), time() + 3600);
+        setcookie($id, base64_encode($data), time() + ini_get('session.cookie_lifetime'));
     }
 
     public function destroy($id) {
