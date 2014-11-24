@@ -1,6 +1,8 @@
 SessionHandlerCookie
 ====================
 
+SessionHandlerCookie adds HMAC-Based Cookie sessions to PHP 5.4+
+
 `SessionHandlerCookie` is a short, but useful piece of code that I've decided to open source from my book, [Scaling PHP Applications](http://scalingphpbook.com).
 
 PHP 5.4 gives us the [`SessionHandlerInterface`](http://php.net/manual/en/class.sessionhandlerinterface.php) which allows for custom session handlers to be added very easily. Out of the box, PHP's filesystem-based sessions don't scale horizontally without using a networked file system or switching to Memcached/Redis backed sessions, both of which are slightly complex for the average developer.
