@@ -1,0 +1,13 @@
+language: php
+php:
+  - 5.5
+
+before_install:
+  - composer selfupdate
+  - composer update
+  - composer install --no-interaction --prefer-source --dev
+
+before_script:
+  - composer dumpautoload
+
+script: phpunit tests
