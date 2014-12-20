@@ -1,6 +1,8 @@
 <?php
 
-class SessionHandlerCookie implements SessionHandlerInterface {
+namespace SessionHandler;
+
+class Cookie implements SessionHandlerInterface {
 
   private $data      = array();
   private $save_path = null;
