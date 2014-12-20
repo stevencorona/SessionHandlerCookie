@@ -66,7 +66,3 @@ class Cookie implements SessionHandlerInterface {
   public function close() {}
 
 }
-
-$handler = new SessionHandlerCookie;
-session_set_save_handler($handler, true);
-session_start();
