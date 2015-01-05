@@ -11,6 +11,13 @@ class Cookie implements SessionHandlerInterface {
   private $hash_algo;
   private $hash_secret;
 
+  /**
+   * Initializes a new Cookie session handler and configures the hashing algorithm.
+   * @param string $hash_secret secret to sign the cookie with
+   * @param string $hash_len the length of the hash
+   * @param string $hash_algo the algorithm to pass to hash_hmac
+   * @return Cookie
+   */
   public function __construct($hash_secret=null, $hash_len=128, $hash_algo="sha512") {
 
     $this->hash_len  = $hash_len;
