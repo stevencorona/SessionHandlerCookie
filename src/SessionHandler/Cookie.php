@@ -43,6 +43,12 @@ class Cookie implements SessionHandlerInterface {
     return md5(php_uname() . getmypid());
   }
 
+  /**
+   * Called by PHP to open the session storage. This is not needed for cookies, but we
+   * store the data anyways.
+   * @param string $save_path
+   * @param string $name
+   */
   public function open($save_path, $name) {
     $this->save_path = $save_path;
     return true;
