@@ -1,5 +1,5 @@
 {
-    "name": "session-handler-cookie/session-handler-cookie",
+    "name": "stevencorona/session-handler-cookie",
     "type": "library",
     "description": "HMAC Cookie Sessions for PHP 5.4",
     "keywords": ["sessions", "cookies"],
