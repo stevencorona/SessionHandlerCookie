@@ -31,6 +31,10 @@ class Cookie implements SessionHandlerInterface {
     $this->hash_secret = $hash_secret;
   }
 
+  /**
+   * Calculates the default_hash_secret to use as a fallback if no secret is passed. It's
+   * a bad idea to rely on this in production.
+   */
   protected function default_hash_secret() {
     // This is not perfect, it's easily leakable to the outside world,
     // but it's predictable and doesn't require much server state. It's a bad
