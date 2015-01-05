@@ -31,11 +31,11 @@ class Cookie implements SessionHandlerInterface {
     $this->hash_secret = $hash_secret;
   }
 
-  // This is not perfect, it's easily leakable to the outside world,
-  // but it's predictable and doesn't require much server state. It's a bad
-  // idea to depend on this and probably won't work with multiple servers or
-  // with multiple PHP-FPM/Apache processes.
   protected function default_hash_secret() {
+    // This is not perfect, it's easily leakable to the outside world,
+    // but it's predictable and doesn't require much server state. It's a bad
+    // idea to depend on this and probably won't work with multiple servers or
+    // with multiple PHP-FPM/Apache processes.
     return md5(php_uname() . getmypid());
   }
 
