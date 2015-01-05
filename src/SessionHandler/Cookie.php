@@ -17,10 +17,14 @@ class Cookie implements SessionHandlerInterface {
     $this->hash_algo = $hash_algo;
 
     if (empty($hash_secret)) {
-      $hash_secret = md5(php_uname() . getmypid());
+      $hash_secret = $this->default_hash_secret();
     }
 
     $this->hash_secret = $hash_secret;
+  }
+
+  protected function default_hash_secret() {
+    return md5(php_uname() . getmypid());
   }
 
   public function open($save_path, $name) {
