@@ -1,13 +1,27 @@
 <?php
 
-class SessionHandlerCookie implements SessionHandlerInterface {
+namespace SessionHandler;
+
+class Cookie implements SessionHandlerInterface {
 
   private $data      = array();
   private $save_path = null;
 
-  const HASH_LEN    = 128;
-  const HASH_ALGO   = 'sha512';
-  const HASH_SECRET = "YOUR_SECRET_STRING";
+  private $hash_len;
+  private $hash_algo;
+  private $hash_secret;
+
+  public function __construct($hash_secret=null, $hash_len=128, $hash_algo="sha512") {
+
+    $this->hash_len  = $hash_len;
+    $this->hash_algo = $hash_algo;
+
+    if (empty($hash_secret)) {
+      $hash_secret = md5(php_uname() . getmypid());
+    }
+
+    $this->hash_secret = $hash_secret;
+  }
 
   public function open($save_path, $name) {
     $this->save_path = $save_path;
@@ -24,17 +38,17 @@ class SessionHandlerCookie implements SessionHandlerInterface {
     // We expect the cookie to be base64 encoded, so let's decode it and make sure
     // that the cookie, at a minimum, is longer than our expact hash length. 
     $raw = base64_decode($_COOKIE[$id]);
-    if (strlen($raw) < self::HASH_LEN) return '';
+    if (strlen($raw) < $this->hash_len) return '';
 
     // The cookie data contains the actual data w/ the hash concatonated to the end,
     // since the hash is a fixed length, we can extract the last HMAC_LENGTH chars
     // to get the hash.
-    $hash = substr($raw, strlen($raw)-self::HASH_LEN, self::HASH_LEN);
-    $data = substr($raw, 0, -(self::HASH_LEN));
+    $hash = substr($raw, strlen($raw)-$this->hash_len, $this->hash_len);
+    $data = substr($raw, 0, -($this->hash_len));
 
     // Calculate what the hash should be, based on the data. If the data has not been
     // tampered with, $hash and $hash_calculated will be the same
-    $hash_calculated = hash_hmac(self::HASH_ALGO, $data, self::HASH_SECRET);
+    $hash_calculated = hash_hmac($this->hash_algo, $data, $this->hash_secret);
 
     // If we calculate a different hash, we can't trust the data. Return an empty string.
     if ($hash_calculated !== $hash) return '';
@@ -47,7 +61,7 @@ class SessionHandlerCookie implements SessionHandlerInterface {
   public function write($id, $data) {
 
     // Calculate a hash for the data and append it to the end of the data string
-    $hash = hash_hmac(self::HASH_ALGO, $data, self::HASH_SECRET);
+    $hash = hash_hmac($this->hash_algo, $data, $this->hash_secret);
     $data .= $hash;
 
     // Set a cookie with the data
@@ -64,7 +78,3 @@ class SessionHandlerCookie implements SessionHandlerInterface {
   public function close() {}
 
 }
-
-$handler = new SessionHandlerCookie;
-session_set_save_handler($handler, true);
-session_start();

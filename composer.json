@@ -20,5 +20,8 @@
     "require-dev": {
         "phpunit/phpunit": "4.3.*"
     },
-    "version": "1.0.0"
+    "version": "2.0.0",
+    "autoload": {
+        "psr-4": {"SessionHandler\\": "src/SessionHandler"}
+    }
 }
