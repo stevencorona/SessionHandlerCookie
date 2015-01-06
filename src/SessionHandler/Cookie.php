@@ -93,7 +93,7 @@ class Cookie implements SessionHandlerInterface {
     if ($hash_calculated !== $hash) return '';
 
     // Return the data, now that it's been verified.
-    return (string)$data;
+    return $data;
 
   }
 
