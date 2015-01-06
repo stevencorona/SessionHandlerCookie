@@ -97,6 +97,12 @@ class Cookie implements SessionHandlerInterface {
 
   }
 
+  /**
+   * Called by PHP to write out session data
+   * @param string $session_id
+   * @param string $data
+   * @return bool write succeeded
+   */
   public function write($id, $data) {
 
     // Calculate a hash for the data and append it to the end of the data string
