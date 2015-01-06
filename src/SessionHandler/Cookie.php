@@ -52,7 +52,7 @@ class Cookie implements SessionHandlerInterface {
   }
 
   /**
-   * Called by PHP to open the session storage. This is not needed for cookies, but we
+   * Called by PHP to initialize the session. This is not needed for cookies, but we
    * store the data anyways.
    * @param string $save_path
    * @param string $name
@@ -62,6 +62,11 @@ class Cookie implements SessionHandlerInterface {
     return true;
   }
 
+  /**
+   * Called by PHP to read session data.
+   * @param string $session_id
+   * @return string serialized session data
+   */
   public function read($id) {
 
     // Check for the existance of a cookie with the name of the session id
