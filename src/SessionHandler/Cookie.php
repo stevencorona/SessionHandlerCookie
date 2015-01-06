@@ -113,6 +113,11 @@ class Cookie implements SessionHandlerInterface {
     setcookie($session_id, base64_encode($data), time()+3600);
   }
 
+  /**
+   * Called by PHP to destroy the session
+   * @param string $session_id
+   * @return bool true success
+   */
   public function destroy($id) {
     setcookie($id, '', time());
   }
