@@ -118,8 +118,8 @@ class Cookie implements SessionHandlerInterface {
    * @param string $session_id
    * @return bool true success
    */
-  public function destroy($id) {
-    setcookie($id, '', time());
+  public function destroy($session_id) {
+    setcookie($session_id, '', time());
   }
 
   // In the context of cookies, these two methods are unneccessary, but must
