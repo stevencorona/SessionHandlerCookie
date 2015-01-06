@@ -2,6 +2,14 @@
 
 namespace SessionHandler;
 
+/*
+ * Allow session data to be stored in the cookie securely, which scales
+ * nicely. 
+ *
+ *
+ * http://php.net/manual/en/class.sessionhandlerinterface.php
+ */
+
 class Cookie implements SessionHandlerInterface {
 
   private $data      = [];
