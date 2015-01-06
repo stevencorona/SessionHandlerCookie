@@ -103,14 +103,14 @@ class Cookie implements SessionHandlerInterface {
    * @param string $data
    * @return bool write succeeded
    */
-  public function write($id, $data) {
+  public function write($session_id, $data) {
 
     // Calculate a hash for the data and append it to the end of the data string
     $hash = hash_hmac($this->hash_algo, $data, $this->hash_secret);
     $data .= $hash;
 
     // Set a cookie with the data
-    setcookie($id, base64_encode($data), time()+3600);
+    setcookie($session_id, base64_encode($data), time()+3600);
   }
 
   public function destroy($id) {
