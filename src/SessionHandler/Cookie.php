@@ -67,16 +67,16 @@ class Cookie implements SessionHandlerInterface {
    * @param string $session_id
    * @return string serialized session data
    */
-  public function read($id) {
+  public function read($session_id) {
 
     // Check for the existance of a cookie with the name of the session id
     // Make sure that the cookie is atleast the size of our hash, otherwise it's invalid
     // Return an empty string if it's invalid.
-    if (! isset($_COOKIE[$id])) return '';
+    if (! isset($_COOKIE[$session_id])) return '';
 
     // We expect the cookie to be base64 encoded, so let's decode it and make sure
     // that the cookie, at a minimum, is longer than our expact hash length. 
-    $raw = base64_decode($_COOKIE[$id]);
+    $raw = base64_decode($_COOKIE[$session_id]);
     if (strlen($raw) < $this->hash_len) return '';
 
     // The cookie data contains the actual data w/ the hash concatonated to the end,
