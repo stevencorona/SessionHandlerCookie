@@ -4,7 +4,7 @@ namespace SessionHandler;
 
 class Cookie implements SessionHandlerInterface {
 
-  private $data      = array();
+  private $data      = [];
   private $save_path = null;
 
   private $hash_len;
