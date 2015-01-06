@@ -124,7 +124,7 @@ class Cookie implements SessionHandlerInterface {
 
   // In the context of cookies, these two methods are unneccessary, but must
   // be implemented as part of the SessionHandlerInterface.
-  public function gc($maxlifetime) {}
+  public function gc($maxlifetime) { return true; }
   public function close() {}
 
 }
