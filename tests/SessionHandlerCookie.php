@@ -28,4 +28,6 @@ class SessionHandlerCookieTest extends PHPUnit_Framework_TestCase {
 	public function testDestroy() {}
 
 	public function testGc() {}
+
+	public function testClose() {}
 }
