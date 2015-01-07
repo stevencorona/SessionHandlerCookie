@@ -23,6 +23,6 @@ class SessionHandlerCookieTest extends PHPUnit_Framework_TestCase {
 
 	public function testRead() {}
 
-	
+	public function testWrite() {}
 	
 }
