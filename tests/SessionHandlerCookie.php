@@ -18,5 +18,7 @@ class SessionHandlerCookieTest extends PHPUnit_Framework_TestCase {
 
 		$this->assertEquals($_COOKIE[session_id()], "");
 	}
+
+	public function testOpen() {}
 	
 }
