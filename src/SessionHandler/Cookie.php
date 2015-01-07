@@ -44,7 +44,7 @@ class Cookie implements \SessionHandlerInterface {
    * a bad idea to rely on this in production.
    */
   protected function default_hash_secret() {
-    // This is not perfect, it's easily leakable to the outside world,
+    // This is not good, it's easily leakable to the outside world,
     // but it's predictable and doesn't require much server state. It's a bad
     // idea to depend on this and probably won't work with multiple servers or
     // with multiple PHP-FPM/Apache processes.
