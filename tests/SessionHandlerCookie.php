@@ -8,5 +8,15 @@ class SessionHandlerCookieTest extends PHPUnit_Framework_TestCase {
 		$sh = new SessionHandler\Cookie;
 		$this->assertInstanceOf('SessionHandler\Cookie', $sh);
 	}
+
+	public function testWritesHashedCookie() {
+		$sh = new SessionHandler\Cookie;
+		session_set_save_handler($sh, false);
+		session_start();
+
+		$_SESSION["foobar"] = "bar";
+
+		$this->assertEquals($_COOKIE[session_id()], "");
+	}
 	
 }
