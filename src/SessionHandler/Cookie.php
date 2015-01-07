@@ -10,7 +10,7 @@ namespace SessionHandler;
  * http://php.net/manual/en/class.sessionhandlerinterface.php
  */
 
-class Cookie implements SessionHandlerInterface {
+class Cookie implements \SessionHandlerInterface {
 
   private $data      = [];
   private $save_path = null;
