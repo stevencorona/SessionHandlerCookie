@@ -8,7 +8,9 @@ PHP 5.4 gives us the [`SessionHandlerInterface`](http://php.net/manual/en/class.
 
 As an alternative, I've created `SessionHandlerCookie`. It's easy to use and plug-and-play, as it works transparently with the native PHP session interface, through the `$_SESSION` global variable.
 
-`SessionHandlerCookie` works by storing the session data inside of a cookie in the users web-browser. To prevent tampering, the data is stored with an HMAC to verify it's integrity. The default HMAC algorithm used is `sha512`, but since this code uses PHP's [Hash Extension](http://php.net/manual/en/book.hash.php), you can configure it to use any hashing algorithm you'd like by modifying `HASH_ALGO` and `HASH_LEN`.
+`SessionHandlerCookie` works by storing the session data inside of a cookie in the users web-browser. To prevent tampering, the data is stored with an HMAC to verify it's integrity. 
+
+The default HMAC algorithm used is `sha512`, but since this code uses PHP's [Hash Extension](http://php.net/manual/en/book.hash.php), you can configure it to use any hashing algorithm you'd like by modifying `HASH_ALGO` and `HASH_LEN`.
 
 Additionally, you must change `"secret"` to be your own secret when deploying this code.
 
