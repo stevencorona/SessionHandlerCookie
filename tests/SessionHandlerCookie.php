@@ -1,6 +1,6 @@
 <?php
 
-require 'vendor/autoload.php';
+require '../vendor/autoload.php';
 
 class SessionHandlerCookieTest extends PHPUnit_Framework_TestCase {
 
@@ -17,6 +17,8 @@ class SessionHandlerCookieTest extends PHPUnit_Framework_TestCase {
 		$_SESSION["foobar"] = "bar";
 
 		$this->assertEquals($_COOKIE[session_id()], "");
+
+		ob_end_clean();
 	}
 
 	public function testOpen() {}
