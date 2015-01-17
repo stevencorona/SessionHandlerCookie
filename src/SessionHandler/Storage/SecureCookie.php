@@ -8,29 +8,37 @@ class SecureCookie {
   private $hash_algo;
   private $hash_secret;
 
-  public function __construct($hash_secret=null, $hash_len=128, $hash_algo="sha512") {
-    $this->hash_len  = $hash_len;
-      $this->hash_algo = $hash_algo;
+  public function __construct($secret=null, $len=128, $algo="sha512") {
+    $this->hash_len  = $len;
+    $this->hash_algo = $algo;
 
-      // If hash secret is empty, we need to set a default one
-      if (empty($hash_secret)) {
-        $hash_secret = $this->default_hash_secret();
-      }
+    // If hash secret is empty, we need to set a default one
+    if (empty($secret)) {
+      $secret = $this->default_hash_secret();
+    }
 
-      $this->hash_secret = $hash_secret;
+    $this->hash_secret = $secret;
   }
 
-  public function has($key) {
-
+  public function has($name) {
+    return isset($_COOKIE[$name]);
   }
 
   public function get($name, $default=null) {
 
-  $raw = base64_decode($this->storage->get($session_id));
-    if (strlen($raw) < $this->hash_len) return '';
+    if (! $this->has($name)) {
+      return $default;
+    }
+
+    $raw = base64_decode($_COOKIE["name"]);
+
+    // Cookie should be atleast the size of the hash length.
+    // If it's not, we can just bail out
+    if (strlen($raw) < $this->hash_len) return $default;
+
 
     // The cookie data contains the actual data w/ the hash concatonated to the end,
-    // since the hash is a fixed length, we can extract the last HMAC_LENGTH chars
+    // since the hash is a fixed length, we can extract the last hash_length chars
     // to get the hash.
     $hash = substr($raw, strlen($raw)-$this->hash_len, $this->hash_len);
     $data = substr($raw, 0, -($this->hash_len));
@@ -39,9 +47,10 @@ class SecureCookie {
     // tampered with, $hash and $hash_calculated will be the same
     $hash_calculated = hash_hmac($this->hash_algo, $data, $this->hash_secret);
 
-    // If we calculate a different hash, we can't trust the data. Return an empty string.
-    if ($hash_calculated !== $hash) return '';
+    // If we calculate a different hash, we can't trust the data.
+    if ($hash_calculated !== $hash) return $default;
 
+    return $data;
   }
 
   public function make($name, $value, $minutes=0, $path=null, $domain=null, $secure=false, $httponly=true) {
@@ -50,11 +59,12 @@ class SecureCookie {
     $data .= $hash;
 
     // Set a cookie with the data
-    setcookie($session_id, base64_encode($data), time()+3600);
+    $ttl = time() + ($minutes * 60);
+    return setcookie($name, base64_encode($data), $ttl, $path, $domain, $secure, $httponly);
   }
 
   public function forget($name) {
-  setcookie($session_id, '', time());
+    return setcookie($name, '', time());
   }
 
   /**
