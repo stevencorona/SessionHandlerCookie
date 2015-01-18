@@ -48,7 +48,7 @@ class SecureCookie {
     $hash_calculated = hash_hmac($this->hash_algo, $data, $this->hash_secret);
 
     // If we calculate a different hash, we can't trust the data.
-    if ($hash_calculated !== $hash) return $default;
+    if ($hash_calculated !== $hash) throw new HashMismatchException();
 
     return $data;
   }
@@ -78,5 +78,9 @@ class SecureCookie {
   // with multiple PHP-FPM/Apache processes.
   return md5(php_uname() . getmypid());
   }
+
+}
+
+class HashMismatchException extends Exception {
 
 }
