@@ -24,6 +24,8 @@ Additionally, you must change `"secret"` to be your own secret when deploying th
 	
 	$_SESSION["foo"] = "bar";
 
+## License
+
     The MIT License (MIT)
 
     Copyright (c) 2014 Steve Corona Inc.
