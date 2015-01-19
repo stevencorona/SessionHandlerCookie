@@ -12,8 +12,7 @@ namespace SessionHandler;
 
 class Cookie implements \SessionHandlerInterface {
 
-  private $data       = [];
-  private $storage    = null;
+  private $storage = null;
 
   /**
    * Initializes a new Cookie session handler and configures the hashing algorithm.
