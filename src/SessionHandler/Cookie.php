@@ -71,7 +71,7 @@ class Cookie implements \SessionHandlerInterface {
     $this->storage->forget($session_id);
   }
 
-  // In the context of cookies, these two methods are unneccessary, but must
+  // In the context of cookies, these three methods are unneccessary, but must
   // be implemented as part of the SessionHandlerInterface.
   public function open($save_path, $name) { return true; }
   public function gc($maxlifetime) { return true; }
