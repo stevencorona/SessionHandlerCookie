@@ -49,7 +49,6 @@ class Cookie implements \SessionHandlerInterface {
 
     // Return the data, now that it's been verified.
     return $data;
-
   }
 
   /**
