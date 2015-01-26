@@ -18,7 +18,7 @@ Additionally, you must change `"secret"` to be your own secret when deploying th
 
 	<?php
 
-	$handler = new SessionHandler\Cookie("secret")
+	$handler = new SessionHandler\Cookie();
 	session_set_save_handler($handler, true);
 	session_start();
 	
