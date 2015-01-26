@@ -8,6 +8,13 @@ class SecureCookie {
   private $hash_algo;
   private $hash_secret;
 
+  /**
+   * Initializes a new Secure Cookie.
+   * @param string $secret secret to sign the cookie with
+   * @param string $len the length of the hash
+   * @param string $algo the algorithm to pass to hash_hmac
+   * @return SecureCookie
+   */
   public function __construct($secret=null, $len=128, $algo="sha512") {
     $this->hash_len  = $len;
     $this->hash_algo = $algo;
