@@ -27,6 +27,13 @@ class SecureCookie {
     $this->hash_secret = $secret;
   }
 
+  /**
+   * Checks if a cookie exists or not.
+   * 
+   * @param string $name name of the cookie to check for
+   * @return true if the cookie exists, false otherwise
+   * 
+   */
   public function has($name) {
     return isset($_COOKIE[$name]);
   }
