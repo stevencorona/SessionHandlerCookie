@@ -1,4 +1,4 @@
-# SessionHandlerCookie
+# Cookie Session Handler for PHP
 
 SessionHandlerCookie adds HMAC-Based Cookie sessions to PHP 5.4+
 
