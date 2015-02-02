@@ -1,6 +1,6 @@
 # Cookie Session Handler for PHP
 
-SessionHandlerCookie adds HMAC-Based Cookie sessions to PHP 5.4+
+This library adds HMAC-Based Cookie sessions to PHP 5.4+
 
 `SessionHandlerCookie` is a short, but useful piece of code that I've decided to open source from my book, [Scaling PHP Applications](http://scalingphpbook.com).
 
