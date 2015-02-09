@@ -2,17 +2,25 @@
 
 This library adds HMAC-Based Cookie sessions to PHP 5.4+
 
-`SessionHandlerCookie` is a short, but useful piece of code that I've decided to open source from my book, [Scaling PHP Applications](http://scalingphpbook.com).
+Cookie Session Handler is a short, but useful piece of code that I've decided to open source from my book, [Scaling PHP Applications](http://scalingphpbook.com).
 
-PHP 5.4 gives us the [`SessionHandlerInterface`](http://php.net/manual/en/class.sessionhandlerinterface.php) which allows for custom session handlers to be added very easily. Out of the box, PHP's filesystem-based sessions don't scale horizontally without using a networked file system or switching to Memcached/Redis backed sessions, both of which are slightly complex for the average developer.
+Sessions are a major source of scaling pains in PHP. By default, session data is stored on the filesystem in PHP, which doesn't scale horizontally as you add more servers (without sticky sessions or NFS). Typically, the way we solve this is by moving sessions to the database or memcached/redis. This punts the problem, but can cause high database load.
 
-As an alternative, I've created `SessionHandlerCookie`. It's easy to use and plug-and-play, as it works transparently with the native PHP session interface, through the `$_SESSION` global variable.
+## Session Data in the Cookie
 
-`SessionHandlerCookie` works by storing the session data inside of a cookie in the users web-browser. To prevent tampering, the data is stored with an HMAC to verify it's integrity. 
+What if we could store the session data in the cookie? It'd -easily- solve the scaling problem, but you'd have to worry about data tampering— remember, cookie data is not sercure and can be modified by the user.
 
-The default HMAC algorithm used is `sha512`, but since this code uses PHP's [Hash Extension](http://php.net/manual/en/book.hash.php), you can use any hashing algorithm supported.
+We solve the data integrity problem the same way as many other popular frameworks (i.e, Rails) by storing the cookie data with an HMAC token.
 
-Additionally, you must change `"secret"` to be your own secret when deploying this code.
+### How does it work?
+
+PHP 5.4 adds the [`SessionHandlerInterface`](http://php.net/manual/en/class.sessionhandlerinterface.php) which allows for custom PHP session handlers.
+
+It's easy to use and plug-and-play and it works transparently with the native session interface, through the `$_SESSION` global variable.
+
+## HMAC Algorithm
+
+The default HMAC algorithm used is `sha512`, but since we use PHP's [Hash Extension](http://php.net/manual/en/book.hash.php), you can use any hashing algorithm supported.
 
 ## Example Usage
 
