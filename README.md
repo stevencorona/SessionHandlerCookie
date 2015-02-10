@@ -18,9 +18,11 @@ PHP 5.4 adds the [`SessionHandlerInterface`](http://php.net/manual/en/class.sess
 
 It's easy to use and plug-and-play and it works transparently with the native session interface, through the `$_SESSION` global variable.
 
-## HMAC Algorithm
+## HMAC
 
-The default HMAC algorithm used is `sha512`, but since we use PHP's [Hash Extension](http://php.net/manual/en/book.hash.php), you can use any hashing algorithm supported.
+This library uses [PHP's Hash Extension](http://php.net/manual/en/book.hash.php) (bundled with PHP as of 5.1.2). By default, it uses `sha512`, but you can change it to any [hashing alogrithm supported](http://php.net/manual/en/function.hash-algos.php).
+
+To make this all work, you need to provide a secret that's used for the HMAC. By default, a very weak and predictable secret is used.
 
 ## Example Usage
 
