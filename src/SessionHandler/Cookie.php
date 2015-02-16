@@ -21,11 +21,15 @@ class Cookie implements \SessionHandlerInterface {
    * @param string $hash_algo the algorithm to pass to hash_hmac
    * @return Cookie
    */
-  public function __construct($storage=null) {
-    if ($storage == null) {
-      $storage = new Storage\SecureCookie();
-    }
-
+  public function __construct($secret=null) {
+    $this->storage = new Storage\SecureCookie($secret);
+  }
+  
+  /**
+   * Set a custom storage handler
+   * @param Storage $storage storage handler
+   */
+  public function setStorage($storage) {
     $this->storage = $storage;
   }
 
