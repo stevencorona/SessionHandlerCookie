@@ -22,13 +22,15 @@ It's easy to use and plug-and-play and it works transparently with the native se
 
 This library uses [PHP's Hash Extension](http://php.net/manual/en/book.hash.php) (bundled with PHP as of 5.1.2). By default, it uses `sha512`, but you can change it to any [hashing alogrithm supported](http://php.net/manual/en/function.hash-algos.php).
 
-To make this all work, you need to provide a secret that's used for the HMAC. By default, a very weak and predictable secret is used.
+To make this all work, you need to provide a secret that's used for the HMAC. By default, a very weak and predictable secret is used, and you should change it to your own secret.
 
 ## Example Usage
 
 	<?php
 
-	$handler = new SessionHandler\Cookie();
+	$secret = "deadc0de";
+	
+	$handler = new SessionHandler\Cookie($secret);
 	session_set_save_handler($handler, true);
 	session_start();
 	
