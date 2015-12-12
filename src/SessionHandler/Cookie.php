@@ -10,6 +10,8 @@ namespace SessionHandler;
  * http://php.net/manual/en/class.sessionhandlerinterface.php
  */
 
+use SessionHandler\Storage\HashMismatchException;
+
 class Cookie implements \SessionHandlerInterface {
 
   private $storage = null;
@@ -27,7 +29,7 @@ class Cookie implements \SessionHandlerInterface {
   
   /**
    * Set a custom storage handler
-   * @param Storage $storage storage handler
+   * @param Storage\SecureCookie $storage storage handler
    */
   public function setStorage($storage) {
     $this->storage = $storage;
@@ -49,6 +51,10 @@ class Cookie implements \SessionHandlerInterface {
       $data = $this->storage->get($session_id);
     } catch (HashMismatchException $ex) {
       $data = '';
+    } catch (\Exception $e) {
+      // not expected, but we need to make sure we return a string value
+      // in every case...
+      $data = '';
     }
 
     // Return the data, now that it's been verified.
@@ -62,7 +68,7 @@ class Cookie implements \SessionHandlerInterface {
    * @return bool write succeeded
    */
   public function write($session_id, $data) {
-    $this->storage->make($session_id, $data);
+    return $this->storage->make($session_id, $data);
   }
 
   /**
@@ -71,7 +77,7 @@ class Cookie implements \SessionHandlerInterface {
    * @return bool true success
    */
   public function destroy($session_id) {
-    $this->storage->forget($session_id);
+    return $this->storage->forget($session_id);
   }
 
   // In the context of cookies, these three methods are unneccessary, but must

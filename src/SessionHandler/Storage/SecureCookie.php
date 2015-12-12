@@ -95,7 +95,6 @@ class SecureCookie
 
         // Set a cookie with the data
         $ttl = time() + ($minutes * 60);
-
         return setcookie($name, base64_encode($value), $ttl, $path, $domain, $secure, $httponly);
     }
 
