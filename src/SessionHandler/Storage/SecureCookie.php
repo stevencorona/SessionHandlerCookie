@@ -95,13 +95,9 @@ class SecureCookie
      * @param int|null $minutes If null, we set the value to `0` (which means the cookie lives
      *                          within this client session), otherwise the timestamp is calculated
      *                          as `current time + $minutes * 60`
-     * @param string|null $path
-     * @param string|null $domain
-     * @param bool $secure
-     * @param bool $httponly
      * @return bool
      */
-    public function make($name, $value, $minutes = null, $path = null, $domain = null, $secure = false, $httponly = true)
+    public function make($name, $value, $minutes = null)
     {
         // Calculate a hash for the data and append it to the end of the data string
         $hash = hash_hmac($this->hash_algo, $value, $this->hash_secret);
@@ -109,12 +105,12 @@ class SecureCookie
 
         // Set a cookie with the data
         $ttl = $minutes === null ? 0 : time() + ($minutes * 60);
-        return setcookie($name, base64_encode($value), $ttl, $path, $domain, $secure, $httponly);
+        return setcookie($name, base64_encode($value), $ttl, '/', null, null, true);
     }
 
     public function forget($name)
     {
-        return setcookie($name, '', time());
+        return setcookie($name, '', 1, '/');
     }
 
 }

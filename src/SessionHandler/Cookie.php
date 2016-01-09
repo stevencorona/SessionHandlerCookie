@@ -77,7 +77,9 @@ class Cookie implements \SessionHandlerInterface {
    * @return bool true success
    */
   public function destroy($session_id) {
-    return $this->storage->forget($session_id);
+    $resPhpSess = $this->storage->forget(session_name());
+    $resData = $this->storage->forget($session_id);
+    return $resPhpSess && $resData;
   }
 
   // In the context of cookies, these three methods are unneccessary, but must
