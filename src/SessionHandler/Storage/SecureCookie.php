@@ -49,7 +49,7 @@ class SecureCookie
             return $default;
         }
 
-        $raw = base64_decode($_COOKIE["name"]);
+        $raw = base64_decode($_COOKIE[$name]);
 
         // Cookie should be atleast the size of the hash length.
         // If it's not, we can just bail out
