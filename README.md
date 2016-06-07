@@ -35,6 +35,19 @@ To make this all work, you need to provide a secret that's used for the HMAC. By
 	session_start();
 	
 	$_SESSION["foo"] = "bar";
+	
+## Symfony Usage
+
+    framework:
+        session:
+            handler_id:  session.handler.cookie
+
+    services:
+        session.handler.cookie:
+            class:     SessionHandler\Cookie
+            public:    true
+            arguments:    ['secret']
+
 
 ## License
 
