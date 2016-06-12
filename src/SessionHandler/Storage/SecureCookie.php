@@ -102,7 +102,8 @@ class SecureCookie
 
     public function forget($name)
     {
-        return setcookie($name, '', time());
+        setcookie( $name, '', time() - 1000 );
+        setcookie( $name, '', time() - 1000, '/' );
     }
 
 }
