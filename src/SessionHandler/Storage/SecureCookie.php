@@ -7,6 +7,7 @@ class SecureCookie
     private $hash_len;
     private $hash_algo;
     private $hash_secret;
+    const DEFAULT_EXPIRATION_DATE = 30;
 
     /**
      * Initializes a new Secure Cookie.
@@ -49,7 +50,7 @@ class SecureCookie
             return $default;
         }
 
-        $raw = base64_decode($_COOKIE["name"]);
+        $raw = base64_decode($_COOKIE[$name]);
 
         // Cookie should be atleast the size of the hash length.
         // If it's not, we can just bail out
@@ -92,7 +93,7 @@ class SecureCookie
         // Calculate a hash for the data and append it to the end of the data string
         $hash = hash_hmac($this->hash_algo, $value, $this->hash_secret);
         $value .= $hash;
-
+        $minutes = $minutes ? $minutes : self::DEFAULT_EXPIRATION_DATE;
         // Set a cookie with the data
         $ttl = time() + ($minutes * 60);
 
@@ -101,7 +102,8 @@ class SecureCookie
 
     public function forget($name)
     {
-        return setcookie($name, '', time());
+        setcookie( $name, '', time() - 1000 );
+        setcookie( $name, '', time() - 1000, '/' );
     }
 
 }
