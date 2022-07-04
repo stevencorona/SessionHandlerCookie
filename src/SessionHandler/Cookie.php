@@ -63,6 +63,7 @@ class Cookie implements \SessionHandlerInterface {
    */
   public function write($session_id, $data) {
     $this->storage->make($session_id, $data);
+    return true;
   }
 
   /**
@@ -72,6 +73,7 @@ class Cookie implements \SessionHandlerInterface {
    */
   public function destroy($session_id) {
     $this->storage->forget($session_id);
+    return true;
   }
 
   // In the context of cookies, these three methods are unneccessary, but must
